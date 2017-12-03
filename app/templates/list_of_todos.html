@@ -6,18 +6,16 @@
   <h2>Your Todo List</h2>
 </div>
 
-<!--
-<form action="/">
-  <input type="text" value="Describe your Todo"></input>
-  <input type="submit" value="Add"></input>
-</form>
--->
 <p>
 {% if current_user.is_authenticated %}
   Hi, {{current_user.username}}
 {% else %}
   Hi anonymous user!
 {% endif%}
+</p>
+
+<p>
+<a href="logout">logout</a>
 </p>
 
 </body>

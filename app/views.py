@@ -1,5 +1,5 @@
 from flask import flash, render_template, redirect, url_for
-from flask_login import login_user
+from flask_login import login_user, logout_user, login_required
 
 from forms import LoginForm
 from models import User
@@ -8,6 +8,7 @@ from . import app
 
 
 @app.route("/")
+@login_required
 def home():
     return render_template("list_of_todos.html")
 
@@ -32,3 +33,10 @@ def login():
     print 'form not validated: render form'
     print form.errors
     return render_template("login.html", form=form)
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
