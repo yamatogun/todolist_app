@@ -2,16 +2,9 @@
 <html>
 <body>
 
-<div>
-  <h2>Your Todo List</h2>
-</div>
 
 <p>
-{% if current_user.is_authenticated %}
-  Hi, {{current_user.username}}
-{% else %}
-  Hi anonymous user!
-{% endif%}
+  Hi, {{current_user.username}}, this is your todo list
 </p>
 
 <p>
