@@ -9,11 +9,16 @@ def load_user(user_id):
     # returns the User object that match the given primary key
     return User.query.get(user_id)
 
-# class Todo(db.Model):
-#     __tablename__ = 'todos'
-#     id = db.Column(db.Integer, primary_key=True)
-#     todo = db.Column(db.String(200), nullable=False)
-#     user_id = db.Column(db.Integer, nullable=False)
+
+class Todo(db.Model):
+    __tablename__ = 'todos'
+    id = db.Column(db.Integer, primary_key=True)
+    todo = db.Column(db.String(200), nullable=False)
+
+    # index to perform faster a join to retrieve the user's todos
+    rank = db.Column(db.Integer, nullable=False)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 
 class User(db.Model, UserMixin):
@@ -27,6 +32,8 @@ class User(db.Model, UserMixin):
                       unique=True,
                       nullable=False)
     password_hash = db.Column(db.String(100), nullable=False)
+
+    todos = db.relationship('Todo', backref='user')  # backref a single user
 
     def set_password(self, pwd):
         self.password_hash = generate_password_hash(pwd)
