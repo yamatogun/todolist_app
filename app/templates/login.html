@@ -1,31 +1,49 @@
-<div>
-  <h1>
-    Your Todo List
-  </h1>
+{%extends "base.html"%}
+
+{%block head%}
+	<link href="../static/login.css" rel="stylesheet">
+{%endblock%}
+
+{%block content%}
+
+
+<div id="loginform">
+
+	<div id="sign-in">
+		<h2>Sign In</h2>
+	</div>
+
+	<div class="errors">
+		{% with messages=get_flashed_messages() %}
+			{% if messages %}
+				<ul>
+					 {% for message in messages %}
+					 <li> {{message}} </li>
+					 {% endfor %}
+				</ul>
+			{% endif %}
+		{% endwith%}
+	</div>
+
+	<div >
+		
+		<form method="POST">
+		
+			{{ form.csrf_token }}
+			
+			<p class="field"> {{form.email.label}} </p>
+			<p class="field"> {{form.email}} </p>
+			
+			<p class="field">  {{form.password.label}} </p>
+			<p class="field"> {{form.password}} </p>
+
+			<span class="field checkbox">{{form.remember_me}}</span>
+			<span class = "field">{{form.remember_me.label}}</span>
+			
+			<p class="field">{{form.submit}}</p>
+		
+		</form>
+
+	</div>
 </div>
-
-{% with messages=get_flashed_messages() %}
-  {% if messages %}
-    <ul>
-       {% for message in messages %}
-       <li> {{message}} </li>
-       {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith%}
-
-<form method="POST">
-
-{{ form.csrf_token }}
-
-<p> {{form.email.label}} </p>
-<p> {{form.email}} </p>
-
-<p>  {{form.password.label}} </p>
-<p> {{form.password}} </p>
-
-<p>{{form.remember_me}}</p>
-{{form.remember_me.label}}
-
-<p>{{form.submit}}</p>
-</form>
+{%endblock%}

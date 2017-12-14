@@ -1,0 +1,14 @@
+header{
+	font-size: 40px;
+}
+
+body{
+	font-family: 'Quicksand', sans-serif;
+	background-color: #fd7171;
+}
+
+hr{
+	height: 10px;
+	border: 0;
+	box-shadow: 0 10px 10px -10px #8c8b8b inset;
+}
