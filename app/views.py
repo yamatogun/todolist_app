@@ -1,5 +1,5 @@
 from flask import flash, render_template, redirect, url_for
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 
 from forms import LoginForm
 from models import User
@@ -7,10 +7,11 @@ from models import User
 from . import app
 
 
-@app.route("/")
+@app.route('/')
 @login_required
 def home():
-    return render_template("list_of_todos.html")
+    todos = current_user.todos
+    return render_template("list_of_todos.html", todos=todos)
 
 
 @app.route('/login', methods=['GET', 'POST'])

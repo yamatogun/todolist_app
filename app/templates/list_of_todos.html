@@ -1,10 +1,30 @@
 {% extends "base.html"%}
 
-<p>
-  Hi, {{current_user.username}}, this is your todo list
-</p>
+{%block head%}
+<link href="../static/list_of_todos.css" rel="stylesheet">
+{%endblock%}
 
-<p>
+{%block content%}
+
+<h2 id="greeting">
+	Hi, {{current_user.username}}<br> This is your Todo list
+</h2>
+
+<div id="todolist">
+	{%if todos%}
+	<ul>
+			{%for todo in todos%}
+			<li class="todo">
+				<p class="todotext">{{todo.todo}}</p>
+			</li>
+			{%endfor%}
+	</ul>
+	{%endif%}
+</div>
+
+<p id="logout">
 	<a href="logout">logout</a>
 </p>
+
+{%endblock%}
 
