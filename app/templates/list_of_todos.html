@@ -26,6 +26,14 @@
 	{%endif%}
 </div>
 
+<form method="POST">
+  {{form.todo(id="entryfield", placeholder="Write your todo task")}}
+  <div id="addbutton">
+  {{form.addbutton(src="../static/plus.svg",
+                   type="image", alt="Submit")}}
+  </div>
+</form>
+
 <p id="logout">
 	<a href="logout">logout</a>
 </p>

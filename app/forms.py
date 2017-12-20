@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import Required, Email, Length
+from wtforms.validators import Required, Email, Length, DataRequired
 
 
 class LoginForm(FlaskForm):
@@ -10,3 +10,7 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[Required()])
     remember_me = BooleanField('Keep me logged in')
     submit = SubmitField('Send')
+
+class AddTodoForm(FlaskForm):
+    todo = StringField("Todo", validators=[DataRequired()])
+    addbutton = SubmitField('AddButton')

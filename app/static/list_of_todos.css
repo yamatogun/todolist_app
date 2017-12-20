@@ -32,3 +32,31 @@ ul{
 	position: relative;
 	top: 25%;
 }
+/*
+#addtodo{
+  background-color: #ffffe6;
+  border-radius: 5px;
+  height: 3em;
+  left: 37.5%;
+  position: relative;
+  width: 25%;
+}
+*/
+
+#entryfield{
+  border-style: hidden;
+  border-radius: 5px;
+  height: 3em;
+  left: 37.5%;
+  position: relative;
+  text-align: center;
+  width: 25%;
+}
+
+#addbutton{
+  margin: 1em 0 1em 0;
+  left: 37.5%;
+  height: 3em;
+  position: relative;
+  width: 25%;
+}
