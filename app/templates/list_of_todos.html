@@ -6,9 +6,13 @@
 
 {%block content%}
 
-<h2 id="greeting">
-	Hi, {{current_user.username}}<br> This is your Todo list
-</h2>
+<h1 class="greeting">
+  Hi, {{current_user.username}} 
+</h1>
+
+<h1 class="greeting">
+  {{date}}
+</h1>
 
 <div id="todolist">
 	{%if todos%}

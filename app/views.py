@@ -1,17 +1,26 @@
+from datetime import date
+
 from flask import flash, render_template, redirect, url_for
 from flask_login import login_user, logout_user, login_required, current_user
 
+from . import app
 from forms import LoginForm
 from models import User
 
-from . import app
 
 
 @app.route('/')
 @login_required
 def home():
     todos = current_user.todos
-    return render_template("list_of_todos.html", todos=todos)
+    today = date.today()
+    day = today.day
+    if 4 <= day <= 20 or 24 <= day <=30:
+        suffix = "th"
+    else: 
+        suffix = ["st", "nd", "rd"][day%10-1]
+    literal_date = today.strftime("%A, %B %d{} %Y".format(suffix))
+    return render_template("list_of_todos.html", todos=todos, date=literal_date)
 
 
 @app.route('/login', methods=['GET', 'POST'])
