@@ -1,12 +1,11 @@
 from datetime import date
 
-from flask import flash, render_template, redirect, url_for
+from flask import flash, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required, current_user
 
-from . import app
-from forms import LoginForm, AddTodoForm 
-from models import User
-
+from . import app, db
+from forms import LoginForm, AddTodoForm
+from models import User, Todo
 
 
 @app.route('/')
@@ -16,14 +15,14 @@ def home():
     todos = current_user.todos
     today = date.today()
     day = today.day
-    if 4 <= day <= 20 or 24 <= day <=30:
+    if 4 <= day <= 20 or 24 <= day <= 30:
         suffix = "th"
-    else: 
-        suffix = ["st", "nd", "rd"][day%10-1]
+    else:
+        suffix = ["st", "nd", "rd"][day % 10 - 1]
     literal_date = today.strftime("%A, %B %d{} %Y".format(suffix))
-    return render_template("list_of_todos.html", 
+    return render_template("list_of_todos.html",
                            todos=todos,
-                           date=literal_date, 
+                           date=literal_date,
                            form=form)
 
 
@@ -54,3 +53,19 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+
+@app.route('/addtodo', methods=['POST'])
+@login_required
+def addtodo():
+    print "IN ADDTODO"
+    content = request.form['content']
+    print "content: " + content
+    user_id = current_user.id
+    ntodos = len(current_user.todos)
+    rank = ntodos + 1  # new rank is last rank + 1
+    # newtodo = Todo(todo=content, user_id=user_id, rank=rank)
+    # db.session.add(newtodo)
+    # db.session.commit()
+    print "NEW TODO TASK CREATED"
+    return "new todo task added in the database", 200

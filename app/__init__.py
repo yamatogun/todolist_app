@@ -16,7 +16,7 @@ print dbpath
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////data.db'
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////app/data.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////' + dbpath
-app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = False  # True
 db = SQLAlchemy(app)
 
 
