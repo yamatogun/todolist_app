@@ -15,12 +15,21 @@
   {{date}}
 </h1>
 
-<div id="todolist">
+<div>
 	{%if todos%}
 	<ul id="ul-todos">
 			{%for todo in todos%}
-			<li class="todo">
-				<p class="todotext">{{todo.todo}}</p>
+			<li>
+        <table class="todolist-table">
+          <tr >
+            <td class="todo-content todo-cell">
+              <p class="todotext">{{todo.todo}}</p>
+            </td >
+            <td class="delete-button todo-cell">
+              <input class="remove-todo" type="image" src="../static/rubbish-bin.svg">
+            </td>
+          </tr>
+        </table>
 			</li>
 			{%endfor%}
 	</ul>
