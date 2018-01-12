@@ -80,4 +80,5 @@ ul{
 
 .remove-todo{
   width: 30%;
+  visibility: hidden;
 }
