@@ -69,3 +69,16 @@ def addtodo():
     # db.session.commit()
     print "NEW TODO TASK CREATED"
     return "new todo task added in the database", 200
+
+
+@app.route('/removetodo', methods=['POST'])
+@login_required
+def removetodo():
+    print "IN REMOVETODO"
+    todo_id = request.form['todo-id']
+    # remove corresponding todo from the database
+    todo_to_remove = Todo.query.get(todo_id)
+    print todo_to_remove
+    db.session.delete(todo_to_remove)
+    # db.session.commit()
+    return "I removed the task", 200

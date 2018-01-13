@@ -19,14 +19,15 @@
 	{%if todos%}
 	<ul id="ul-todos">
 			{%for todo in todos%}
-			<li>
+      <li id="todo-{{todo.id}}">
         <table class="todolist-table">
           <tr >
             <td class="todo-content todo-cell">
               <p class="todotext">{{todo.todo}}</p>
             </td >
             <td class="delete-button todo-cell">
-              <input class="remove-todo" type="image" src="../static/rubbish-bin.svg">
+              <input id="remove-{{todo.id}}" class="remove-todo" type="image"
+              src="../static/rubbish-bin.svg">
             </td>
           </tr>
         </table>
@@ -50,6 +51,7 @@
 </p>
 
 <script src="/static/js/addtodo.js"></script>
+<script src="/static/js/removetodo.js"></script>
 
 
 {%endblock%}
