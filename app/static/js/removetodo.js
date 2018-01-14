@@ -23,7 +23,13 @@ var csrf_token = document.getElementById("csrf-token").content;
 
 for (var i=0; i < delete_buttons.length; i++){
   var delete_button = delete_buttons[i];
-  delete_button.onclick = function(e){
+  delete_button.onclick = deleteTodo;
+}
+
+function deleteTodo(e){
+    /*
+    "e" is the event
+    */
     e.preventDefault();  // mandatory ?
     var request = new XMLHttpRequest();
     request.open("POST", url);
@@ -37,15 +43,14 @@ for (var i=0; i < delete_buttons.length; i++){
         var li_id = "todo-" + todo_id;
         var li = document.getElementById(li_id);
         li.parentNode.removeChild(li);
-        
       }
     }
     
     var button_id = this.id;  // delete button and li ancestor have same id
     var todo_id = button_id.split("-")[1];  // could be improved
+    console.log("get todoid: " + todo_id);
     todo_id = encodeURIComponent(todo_id);
     var data = "todo-id=" + todo_id;
     console.log(data);
     request.send(data);
-  };
-}
+};

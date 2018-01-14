@@ -1,11 +1,13 @@
 from datetime import date
 
-from flask import flash, render_template, redirect, url_for, request
+from flask import flash, render_template, redirect, url_for, request, jsonify
 from flask_login import login_user, logout_user, login_required, current_user
 
 from . import app, db
 from forms import LoginForm, AddTodoForm
 from models import User, Todo
+
+from sqlalchemy.exc import IntegrityError
 
 
 @app.route('/')
@@ -60,15 +62,28 @@ def logout():
 def addtodo():
     print "IN ADDTODO"
     content = request.form['content']
-    print "content: " + content
     user_id = current_user.id
     ntodos = len(current_user.todos)
     rank = ntodos + 1  # new rank is last rank + 1
-    # newtodo = Todo(todo=content, user_id=user_id, rank=rank)
-    # db.session.add(newtodo)
-    # db.session.commit()
-    print "NEW TODO TASK CREATED"
-    return "new todo task added in the database", 200
+    newtodo = Todo(todo=content, user_id=user_id, rank=rank)
+    db.session.add(newtodo)
+    try:
+        db.session.commit()
+        todo_id = newtodo.id  # id given only after committing
+        print "todo_id: {}".format(todo_id)
+        # response = {
+        #     "message": "New todo task successfully inserted",
+        #     "tid": todo_id
+        # }
+        # response = jsonify(response)
+        message = "New todo task successfully inserted"
+        response = jsonify(message=message, tid=todo_id)
+        response.status_code = 200
+        return response
+        # return "New todo task added in database", 200
+    except IntegrityError:
+        db.session.rollback()
+        return "Couldn't perform todo insertion", 500
 
 
 @app.route('/removetodo', methods=['POST'])
@@ -80,5 +95,5 @@ def removetodo():
     todo_to_remove = Todo.query.get(todo_id)
     print todo_to_remove
     db.session.delete(todo_to_remove)
-    # db.session.commit()
-    return "I removed the task", 200
+    db.session.commit()
+    return "Deletion completed", 200
