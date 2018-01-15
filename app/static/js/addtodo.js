@@ -37,7 +37,16 @@ submit.onclick = function(e){
       table.appendChild(tr);
 
       var td = document.createElement("td");
-      td.className = "todo-content todo-cell";
+      td.className = "todo-status";
+      tr.appendChild(td);
+
+      var checkbox  = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.id = "status-" + todo_id;
+      td.appendChild(checkbox);
+
+      td = document.createElement("td");
+      td.className = "todo-content";
       tr.appendChild(td);
 
       var p = document.createElement("p");
@@ -46,7 +55,7 @@ submit.onclick = function(e){
       td.appendChild(p);
 
       td = document.createElement("td");
-      td.className = "delete-button todo-cell";
+      td.className = "delete-button";
       tr.appendChild(td);
 
       var input = document.createElement('input');

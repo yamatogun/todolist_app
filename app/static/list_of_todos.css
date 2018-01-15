@@ -28,25 +28,24 @@
   
 	margin: 1em 0 1em 0;
 	text-align: center;
+  border-spacing: 0;
+}
+
+.todo-status{
+  width: calc(0.03 * var(--document-width));
+  background-color: #ffffff;
+  border-right: 1px solid #cccccc;
 }
 
 .todo-content{
-  width: calc(0.3 * var(--document-width));
-
-
+  width: calc(0.27 * var(--document-width));
 	background-color: #ffffff;
   padding: 0;
 }
 
 .delete-button{
   width: calc(0.05 * var(--document-width));
-
-
 }
-
-.todo-cell{
-}
-
 
 ul{
 	list-style-type: none;
@@ -82,3 +81,4 @@ ul{
   width: 30%;
   visibility: hidden;
 }
+

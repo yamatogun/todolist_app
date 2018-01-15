@@ -21,11 +21,14 @@
 			{%for todo in todos%}
       <li id="todo-{{todo.id}}">
         <table class="todolist-table">
-          <tr >
-            <td class="todo-content todo-cell">
+          <tr>
+            <td class=todo-status>
+              <input id="status-{{todo.id}}" type="checkbox">
+            </td>
+            <td class="todo-content">
               <p class="todotext">{{todo.todo}}</p>
-            </td >
-            <td class="delete-button todo-cell">
+            </td>
+            <td class="delete-button">
               <input id="remove-{{todo.id}}" class="remove-todo" type="image"
               src="../static/rubbish-bin.svg">
             </td>

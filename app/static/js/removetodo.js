@@ -5,12 +5,12 @@ for (var i=0; i < lis.length; i++){
   var li = lis[i];
   // make the garbage bin icon appear
   li.onmouseover = function(){
-    var garbageBin = this.querySelectorAll("input")[0];
+    var garbageBin = this.querySelectorAll("input[type='image']")[0];
     garbageBin.style.visibility = "visible";
   };
   // make it disappear when the mouse moves out
   li.onmouseout = function(){
-    var garbageBin = this.querySelectorAll("input")[0];
+    var garbageBin = this.querySelectorAll("input[type='image']")[0];
     garbageBin.style.visibility = "hidden";
   };
 }
