@@ -65,17 +65,13 @@ def addtodo():
     user_id = current_user.id
     ntodos = len(current_user.todos)
     rank = ntodos + 1  # new rank is last rank + 1
+    print "rank: ", rank
     newtodo = Todo(todo=content, user_id=user_id, rank=rank)
     db.session.add(newtodo)
     try:
         db.session.commit()
         todo_id = newtodo.id  # id given only after committing
         print "todo_id: {}".format(todo_id)
-        # response = {
-        #     "message": "New todo task successfully inserted",
-        #     "tid": todo_id
-        # }
-        # response = jsonify(response)
         message = "New todo task successfully inserted"
         response = jsonify(message=message, tid=todo_id)
         response.status_code = 200
@@ -93,7 +89,14 @@ def removetodo():
     todo_id = request.form['todo-id']
     # remove corresponding todo from the database
     todo_to_remove = Todo.query.get(todo_id)
+    current_rank = todo_to_remove.rank
     print todo_to_remove
     db.session.delete(todo_to_remove)
+    # update rank of remaining todos in the same transaction
+    # decrement rank for todos that have higher ranks
+    todos_higher_rank = Todo.query.filter(Todo.rank > current_rank).all()
+    if todos_higher_rank:
+        for todo in todos_higher_rank:
+            todo.rank -= 1
     db.session.commit()
     return "Deletion completed", 200
