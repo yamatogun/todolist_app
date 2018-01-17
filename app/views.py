@@ -100,3 +100,17 @@ def removetodo():
             todo.rank -= 1
     db.session.commit()
     return "Deletion completed", 200
+
+
+@login_required
+@app.route('/updatestatus', methods=['POST'])
+def update_status():
+    status_value = request.form['todo-status']
+    tid = request.form['tid']
+    status = True if status_value == "true" else False
+    uid = current_user.id
+    todo = Todo.query.get(tid)  # int ?
+    if todo.user_id == uid:  # to prevent any update from another user
+        todo.status = status
+        db.session.commit()
+    return "ok status updated", 200

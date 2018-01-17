@@ -16,14 +16,22 @@
 </h1>
 
 <div>
-	{%if todos%}
 	<ul id="ul-todos">
+	{%if todos%}
 			{%for todo in todos%}
       <li id="todo-{{todo.id}}">
+        {%if todo.status%}
+        <table class="todolist-table todo-completed">
+        {%else%}
         <table class="todolist-table">
+        {%endif%}
           <tr>
             <td class=todo-status>
-              <input id="status-{{todo.id}}" type="checkbox">
+              {%if todo.status%}
+              <input id="status-{{todo.id}}" class="status-checkbox" type="checkbox" checked>
+              {%else%}
+              <input id="status-{{todo.id}}" class="status-checkbox" type="checkbox">
+              {%endif%}
             </td>
             <td class="todo-content">
               <p class="todotext">{{todo.todo}}</p>
@@ -36,8 +44,8 @@
         </table>
 			</li>
 			{%endfor%}
-	</ul>
 	{%endif%}
+	</ul>
 </div>
 
 <form method="POST">
@@ -55,6 +63,7 @@
 
 <script src="/static/js/addtodo.js"></script>
 <script src="/static/js/removetodo.js"></script>
+<script src="/static/js/update_status.js"></script>
 
 
 {%endblock%}

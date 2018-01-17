@@ -82,3 +82,6 @@ ul{
   visibility: hidden;
 }
 
+.todo-completed{
+  opacity: 0.5;
+}

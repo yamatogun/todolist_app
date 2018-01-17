@@ -17,6 +17,8 @@ class Todo(db.Model):
 
     # index to perform faster a join to retrieve the user's todos
     rank = db.Column(db.Integer, nullable=False)
+    # status to indicate the task completion
+    status = db.Column(db.Boolean, nullable=False, default=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
