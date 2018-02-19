@@ -1,20 +1,19 @@
 from datetime import date
 
-from flask import flash, render_template, redirect, url_for, request, jsonify
-from flask_login import login_user, logout_user, login_required, current_user
+from flask import flash, jsonify, redirect, render_template, request, url_for
+from flask_login import current_user, login_user,  login_required, logout_user
+from sqlalchemy.exc import IntegrityError
 
 from . import app, db
-from forms import LoginForm, AddTodoForm
-from models import User, Todo
-
-from sqlalchemy.exc import IntegrityError
+from forms import AddTodoForm, LoginForm
+from models import Todo, User
 
 
 @app.route('/')
 @login_required
 def home():
     form = AddTodoForm()
-    todos = current_user.todos
+    todos = current_user.todos  # current_user is an instance of User
     today = date.today()
     day = today.day
     if 4 <= day <= 20 or 24 <= day <= 30:
